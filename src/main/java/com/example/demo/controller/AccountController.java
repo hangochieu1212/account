@@ -19,8 +19,8 @@ public class AccountController {
     private AccountBusiness accountBusiness;
 
     @PostMapping("/add")
-    public ResponseEntity<BaseResponse> addAccount(@RequestBody AddAccountRequest request) {
-        return null;
+    public AccountDto addAccount(@RequestBody AddAccountRequest request) {
+        return accountBusiness.addAccount(request);
     }
     @GetMapping("/{id}")
     public AccountDto getAccount(@PathVariable("id") int id) {
