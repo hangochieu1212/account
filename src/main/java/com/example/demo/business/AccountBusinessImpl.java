@@ -69,13 +69,12 @@ public class AccountBusinessImpl implements AccountBusiness {
         Account account = accountService.findAccountById(id);
         if(account != null) {
             account.setUsername(request.getUsername());
-            account.setPassword(request.getPassword());
+            account.setPassword(passwordEncoder.encode(request.getPassword()));
             account.setEmail(request.getEmail());
             accountService.addAccount(account);
             return convertAccountToAccountDto(account);
         }
-        System.out.println("Id does not exist");
-        return null;
+       throw new AccountRestApiException(AccountErrorCode.USER_NOT_EXIST);
     }
 
     @Override
